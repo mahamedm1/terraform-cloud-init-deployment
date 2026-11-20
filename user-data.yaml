@@ -1,0 +1,27 @@
+#cloud-config
+
+package_update: true
+package_upgrade: true
+
+timezone: "Etc/Greenwich"
+
+hostname: mahama1
+
+users:
+  - default
+  - name: Mahamed
+    groups:
+      - sudo
+    sudo:
+      - ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - <SSH_PUBLIC_KEY>
+
+runcmd:
+  - sed -i '/PermitRootLogin/d' /etc/ssh/sshd_config
+  - echo "PermitRootLogin no" >> /etc/ssh/sshd_config
+  - systemctl restart sshd
+
+packages:
+  - nginx
