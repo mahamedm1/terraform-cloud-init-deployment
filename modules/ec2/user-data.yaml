@@ -9,19 +9,20 @@ hostname: mahama1
 
 users:
   - default
-  - name: Mahamed
+  - name: mahamed
     groups:
       - sudo
     sudo:
       - ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     ssh_authorized_keys:
-      - <SSH_PUBLIC_KEY>
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC79iqCsySvF4WpOTcMix134RamF+uBR8JcWHp0BJI3noFQZqL3hd8Juu/hqFbDEIJWgkwV+G+MXF2IV/Axh007oCfPVNyAEdbzsaft5IJF3/G1y2+2pSDmnVLx+xThS5bjxg9cn+lD/H1K8c2g3CNEIF8whCFRnYyoclY8d00kip5uAEPbiPAwWOtvIOv2FIt1OIlUw2kfWWA+ZtL90nax3M5Dy1or89xqlQ7rJhrJ+BLKQHmCToy/jbKXxVxDQtyNtleENLau/PDhhuTAgQa7qQRpuAczRFYpA72QTbXgfEd+QIKSfBz4xp/ud/mKsGXqX+SD7jG3DPZch2xYAOcD
 
 runcmd:
   - sed -i '/PermitRootLogin/d' /etc/ssh/sshd_config
   - echo "PermitRootLogin no" >> /etc/ssh/sshd_config
-  - systemctl restart sshd
+  - systemctl restart ssh
+  - systemctl enable --now nginx
 
 packages:
   - nginx

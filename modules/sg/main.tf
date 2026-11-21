@@ -1,7 +1,7 @@
 resource "aws_security_group" "main" {
   name        = var.sg_name
   description = "Security group for our EC2 instance"
-  vpc_id      = vpc.main.id
+  vpc_id      = var.vpc_id
 
   tags = {
     Name = var.sg_name
@@ -19,9 +19,9 @@ resource "aws_vpc_security_group_ingress_rule" "ssh" {
 resource "aws_vpc_security_group_ingress_rule" "http" {
   security_group_id = aws_security_group.main.id
   cidr_ipv4         = "0.0.0.0/0"
-  from_port         = 443
+  from_port         = 80
   ip_protocol       = "tcp"
-  to_port           = 443
+  to_port           = 80
 }
 
 
