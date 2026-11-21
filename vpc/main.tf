@@ -19,7 +19,9 @@ tags = {
     }
 }
 
-
+resource "intenet_gateway" main{
+    cidr_block = "0.0.0.0/0"
+}
 
 
 
