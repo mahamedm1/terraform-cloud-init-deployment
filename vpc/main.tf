@@ -10,3 +10,18 @@ resource "vpc" main {
 
 }
 
+resource "subnet" main{
+    cidr_block = var.subnet_cidr
+       
+
+tags = {
+    Name = var.subnet_name
+    }
+}
+
+
+
+
+
+
+
